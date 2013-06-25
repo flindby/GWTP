@@ -29,7 +29,7 @@ package com.gwtplatform.dispatch.shared;
  * @author David Peterson
  */
 public abstract class AbstractSimpleResult<T> implements Result {
-    private T value;
+    T value;
 
     public AbstractSimpleResult(T value) {
         this.value = value;

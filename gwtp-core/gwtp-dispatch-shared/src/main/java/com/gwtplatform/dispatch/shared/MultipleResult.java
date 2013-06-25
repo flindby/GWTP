@@ -31,7 +31,7 @@ import java.util.List;
  * @author Christopher Viel
  */
 public class MultipleResult<T> implements Result {
-    private List<T> value;
+    List<T> value;
 
     public MultipleResult(List<T> value) {
         this.value = value;
