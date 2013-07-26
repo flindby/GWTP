@@ -25,6 +25,7 @@
         <gae.stop.port>8081</gae.stop.port>
         <gae.port>8888</gae.port>
         <gae.address>127.0.0.1</gae.address>
+        <gae-studio.version>1.0-SNAPSHOT</gae-studio.version>
 
         <resteasy.version>3.0-beta-4</resteasy.version>
     </properties>
@@ -243,6 +244,29 @@
             <artifactId>persistence-api</artifactId>
             <version>${persistence-api.version}</version>
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>com.arcbees.gaestudio</groupId>-->
+            <!--<artifactId>gae-studio-webapp</artifactId>-->
+            <!--<version>${gae-studio.version}</version>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>com.arcbees.gaestudio</groupId>
+            <artifactId>gae-studio-server</artifactId>
+            <version>${gae-studio.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.arcbees.gaestudio</groupId>
+            <artifactId>gae-studio-client</artifactId>
+            <version>${gae-studio.version}</version>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>com.arcbees.gaestudio</groupId>-->
+            <!--<artifactId>gae-studio</artifactId>-->
+            <!--<version>${gae-studio.version}</version>-->
+        <!--</dependency>-->
 
         <!-- REST -->
         <dependency>

@@ -11,7 +11,7 @@
                                 value="com.gwtplatform.carstore.client.gin.TabletModule"/>
     <set-configuration-property name="gin.ginjector.module.mobile"
                                 value="com.gwtplatform.carstore.client.gin.MobileModule"/>
-
+    <set-property name="user.agent" value="safari" />
     <!-- Shared modules -->
     <extend-configuration-property name="gin.ginjector.modules"
                                    value="com.gwtplatform.carstore.client.gin.CarStoreModule"/>
