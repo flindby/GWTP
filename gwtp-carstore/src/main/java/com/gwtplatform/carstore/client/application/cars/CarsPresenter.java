@@ -39,6 +39,8 @@ import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
+import com.gwtplatform.carstore.shared.dispatch.GetResults;
+import com.gwtplatform.carstore.shared.dispatch.Response;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -117,19 +119,19 @@ public class CarsPresenter extends Presenter<MyView, MyProxy>
 
     @Override
     public void fetchData(final int offset, int limit) {
-        dispatcher.execute(carService.getCars(offset, limit), new AbstractAsyncCallback<List<CarDto>>() {
+        dispatcher.execute(carService.getCars(offset, limit), new AbstractAsyncCallback<GetResults<CarDto>>() {
             @Override
-            public void onSuccess(List<CarDto> cars) {
-                getView().displayCars(offset, cars);
+            public void onSuccess(GetResults<CarDto> cars) {
+                getView().displayCars(offset, cars.getPayload());
             }
         });
     }
 
     @Override
     public void onDelete(CarDto carDto) {
-        dispatcher.execute(carService.delete(carDto.getId()), new ErrorHandlerAsyncCallback<Void>(this) {
+        dispatcher.execute(carService.delete(carDto.getId()), new ErrorHandlerAsyncCallback<Response>(this) {
             @Override
-            public void onSuccess(Void nothing) {
+            public void onSuccess(Response nothing) {
                 fetchDataForDisplay();
 
                 getView().setCarsCount(getView().getCarDisplay().getRowCount() - 1);

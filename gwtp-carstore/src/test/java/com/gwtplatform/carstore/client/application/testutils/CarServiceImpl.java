@@ -16,27 +16,27 @@
 
 package com.gwtplatform.carstore.client.application.testutils;
 
-import java.util.List;
-
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
 import com.google.inject.TypeLiteral;
 import com.gwtplatform.carstore.client.rest.CarService;
+import com.gwtplatform.carstore.shared.dispatch.GetResult;
+import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.rest.RestParameter;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 public class CarServiceImpl implements CarService {
     @Override
-    public RestAction<List<CarDto>> getCars() {
-        return new ActionImpl<List<CarDto>>(new TypeLiteral<RestAction<List<CarDto>>>() {});
+    public RestAction<GetResults<CarDto>> getCars() {
+        return new ActionImpl<GetResults<CarDto>>(new TypeLiteral<RestAction<GetResults<CarDto>>>() {});
     }
 
     @Override
-    public RestAction<List<CarDto>> getCars(@QueryParam(RestParameter.OFFSET) int offset,
+    public RestAction<GetResults<CarDto>> getCars(@QueryParam(RestParameter.OFFSET) int offset,
                                             @QueryParam(RestParameter.LIMIT) int limit) {
-        return new ActionImpl<List<CarDto>>(new TypeLiteral<RestAction<List<CarDto>>>() {});
+        return new ActionImpl<GetResults<CarDto>>(new TypeLiteral<RestAction<GetResults<CarDto>>>() {});
     }
 
     @Override
@@ -45,8 +45,8 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public RestAction<CarDto> saveOrCreate(CarDto carDto) {
-        return new ActionImpl<CarDto>(new TypeLiteral<RestAction<CarDto>>() {});
+    public RestAction<GetResult<CarDto>> saveOrCreate(CarDto carDto) {
+        return new ActionImpl<GetResult<CarDto>>(new TypeLiteral<RestAction<GetResult<CarDto>>>() {});
     }
 
     @Override

@@ -32,6 +32,8 @@ import javax.ws.rs.core.Response;
 
 import com.gwtplatform.carstore.server.dao.CarDao;
 import com.gwtplatform.carstore.server.dao.domain.Car;
+import com.gwtplatform.carstore.shared.dispatch.GetResult;
+import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.rest.PathParameter;
 import com.gwtplatform.carstore.shared.rest.ResourcesPath;
@@ -63,7 +65,7 @@ public class CarResource {
             cars = Car.createDto(carDao.getSome(offset, limit));
         }
 
-        return Response.ok(cars).build();
+        return Response.ok(new GetResults<CarDto>(cars)).build();
     }
 
     @GET
@@ -78,7 +80,7 @@ public class CarResource {
     public Response saveOrCreate(CarDto carDto) {
         Car car = carDao.put(Car.create(carDto));
 
-        return Response.ok(Car.createDto(car)).build();
+        return Response.ok(new GetResult<CarDto>(Car.createDto(car))).build();
     }
 
     @Path(PathParameter.ID)
@@ -86,6 +88,6 @@ public class CarResource {
     public Response delete(@PathParam(RestParameter.ID) Long id) {
         carDao.delete(id);
 
-        return Response.ok().build();
+        return Response.ok(new com.gwtplatform.carstore.shared.dispatch.Response()).build();
     }
 }

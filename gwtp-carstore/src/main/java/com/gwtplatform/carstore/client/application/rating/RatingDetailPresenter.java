@@ -39,6 +39,7 @@ import com.gwtplatform.carstore.client.rest.RatingService;
 import com.gwtplatform.carstore.client.security.LoggedInGatekeeper;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
+import com.gwtplatform.carstore.shared.dispatch.GetResults;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
@@ -131,10 +132,10 @@ public class RatingDetailPresenter extends Presenter<MyView, MyProxy>
         List<ActionType> actions = Arrays.asList(ActionType.DONE);
         ChangeActionBarEvent.fire(this, actions, false);
 
-        dispatcher.execute(carService.getCars(), new AbstractAsyncCallback<List<CarDto>>() {
+        dispatcher.execute(carService.getCars(), new AbstractAsyncCallback<GetResults<CarDto>>() {
             @Override
-            public void onSuccess(List<CarDto> cars) {
-                onGetCarsSuccess(cars);
+            public void onSuccess(GetResults<CarDto> cars) {
+                onGetCarsSuccess(cars.getPayload());
             }
         });
     }

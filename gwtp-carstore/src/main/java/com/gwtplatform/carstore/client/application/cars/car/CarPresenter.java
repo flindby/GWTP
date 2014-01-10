@@ -41,6 +41,8 @@ import com.gwtplatform.carstore.client.rest.CarService;
 import com.gwtplatform.carstore.client.rest.ManufacturerService;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.client.util.ErrorHandlerAsyncCallback;
+import com.gwtplatform.carstore.shared.dispatch.GetResult;
+import com.gwtplatform.carstore.shared.dispatch.Response;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
 import com.gwtplatform.dispatch.rest.shared.RestDispatch;
@@ -128,10 +130,10 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
 
     @Override
     public void onSave(final CarDto carDto) {
-        dispatcher.execute(carService.saveOrCreate(carDto), new ErrorHandlerAsyncCallback<CarDto>(this) {
+        dispatcher.execute(carService.saveOrCreate(carDto), new ErrorHandlerAsyncCallback<GetResult<CarDto>>(this) {
             @Override
-            public void onSuccess(CarDto newCar) {
-                onCarSaved(carDto, newCar);
+            public void onSuccess(GetResult<CarDto> newCar) {
+                onCarSaved(carDto, newCar.getPayload());
             }
         });
     }
@@ -210,9 +212,9 @@ public class CarPresenter extends Presenter<MyView, CarPresenter.MyProxy>
     private void onDeleteCar() {
         Boolean confirm = Window.confirm("Are you sure you want to delete " + carDto.getModel() + "?");
         if (confirm) {
-            dispatcher.execute(carService.delete(carDto.getId()), new ErrorHandlerAsyncCallback<Void>(this) {
+            dispatcher.execute(carService.delete(carDto.getId()), new ErrorHandlerAsyncCallback<Response>(this) {
                 @Override
-                public void onSuccess(Void nothing) {
+                public void onSuccess(Response nothing) {
                     NavigationTabEvent.fireClose(CarPresenter.this, CarPresenter.this);
                 }
             });

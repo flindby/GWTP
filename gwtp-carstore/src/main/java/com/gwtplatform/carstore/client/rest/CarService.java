@@ -16,8 +16,6 @@
 
 package com.gwtplatform.carstore.client.rest;
 
-import java.util.List;
-
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -25,6 +23,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
+import com.gwtplatform.carstore.shared.dispatch.GetResult;
+import com.gwtplatform.carstore.shared.dispatch.GetResults;
+import com.gwtplatform.carstore.shared.dispatch.Response;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.rest.PathParameter;
 import com.gwtplatform.carstore.shared.rest.ResourcesPath;
@@ -35,10 +36,10 @@ import com.gwtplatform.dispatch.rest.shared.RestService;
 @Path(ResourcesPath.CAR)
 public interface CarService extends RestService {
     @GET
-    RestAction<List<CarDto>> getCars();
+    RestAction<GetResults<CarDto>> getCars();
 
     @GET
-    RestAction<List<CarDto>> getCars(@QueryParam(RestParameter.OFFSET) int offset,
+    RestAction<GetResults<CarDto>> getCars(@QueryParam(RestParameter.OFFSET) int offset,
                                            @QueryParam(RestParameter.LIMIT) int limit);
 
     @GET
@@ -46,9 +47,9 @@ public interface CarService extends RestService {
     RestAction<Integer> getCarsCount();
 
     @POST
-    RestAction<CarDto> saveOrCreate(CarDto carDto);
+    RestAction<GetResult<CarDto>> saveOrCreate(CarDto carDto);
 
     @DELETE
     @Path(PathParameter.ID)
-    RestAction<Void> delete(@PathParam(RestParameter.ID) Long carId);
+    RestAction<Response> delete(@PathParam(RestParameter.ID) Long carId);
 }

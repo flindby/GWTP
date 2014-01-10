@@ -90,6 +90,9 @@
                     <appEngineHome>${gae.home}</appEngineHome>
                     <extraJvmArgs>-Xss2048k -Xmx1024M -XX:MaxPermSize=512m</extraJvmArgs>
                     <localWorkers>2</localWorkers>
+                    <logLevel>INFO</logLevel>
+
+                    <compileReport>true</compileReport>
 
                     <runTarget>CarStore.html</runTarget>
                     <modules>
