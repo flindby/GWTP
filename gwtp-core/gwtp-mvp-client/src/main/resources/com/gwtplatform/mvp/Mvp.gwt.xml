@@ -53,4 +53,12 @@
         <when-type-assignable class="com.gwtplatform.mvp.client.proxy.PlaceTokenRegistry" />
     </generate-with>
 
+    <!--Generate version checker-->
+    <generate-with class="com.gwtplatform.mvp.rebind.version.VersionCheckerGenerator">
+        <when-type-assignable class="com.gwtplatform.mvp.client.version.VersionChecker"/>
+    </generate-with>
+
+    <extend-configuration-property name="gin.ginjector.modules"
+                                   value="com.gwtplatform.mvp.client.gin.LolModule"/>
+
 </module>
